@@ -300,8 +300,20 @@ end
 -- @S - Stream object to read from
 -- @len - Length of string being read
 local function stm_string(S, len)
+	local sourceStr = S.source
+
+	if type(sourceStr) == "function" then
+		local success, result = pcall(sourceStr)
+		if success and type(result) == "string" then
+			sourceStr = result
+		else
+			warn("Warning: S.source did not produce a string, using an empty string as default.")
+			sourceStr = 'print("...")'
+		end
+	end
+
 	local pos = S.index + len
-	local str = string.sub(S.source, S.index, pos - 1)
+	local str = string.sub(sourceStr, S.index, pos - 1)
 
 	S.index = pos
 	return str
