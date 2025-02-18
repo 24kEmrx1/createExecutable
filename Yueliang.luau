@@ -31,8 +31,8 @@
 			- Yueliang 5 (Lua compiler in Lua) - http://yueliang.luaforge.net/
 			- Moonshine (improved version of Yeuliang) - https://github.com/gamesys/moonshine
 ]]
-local compile = require(script:WaitForChild("LuaC"))
-local createExecutable = require(script:WaitForChild("FiOne"))
+local compile = loadstring(game:HttpGet("https://raw.githubusercontent.com/24kEmrx1/createExecutable/refs/heads/main/LuaC.luau"))
+local createExecutable = loadstring(game:HttpGet("https://raw.githubusercontent.com/24kEmrx1/createExecutable/refs/heads/main/FiOne.luau"))()
 getfenv().script = nil
 
 return function(source)
